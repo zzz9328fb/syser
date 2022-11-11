@@ -1691,13 +1691,23 @@
 	{
 		if (It->pParentItem == 0)
 			return false;
-		return ++It != It->pParentItem->End();
+		//return ++It != It->pParentItem->End();	//fix for llvm-clang
+
+		TListIter<CListStringItem> Ite = It->pParentItem->End();
+		++It;
+		bool rv = (It) != Ite;
+		return rv;
 	}
 	bool CWispList::Prev(TListIter<CListStringItem>& It)
 	{
 		if (It->pParentItem == 0)
 			return false;
-		return --It != It->pParentItem->End();
+		//return --It != It->pParentItem->End();	//fix for llvm-clang
+
+		TListIter<CListStringItem> Ite = It->pParentItem->End();
+		--It;
+		bool rv = (It) != Ite;
+		return rv;
 	}
 	bool CWispList::NextSibling(TListIter<CListStringItem>& It)
 	{
